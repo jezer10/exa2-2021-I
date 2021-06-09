@@ -16,4 +16,6 @@ app.get('/', (req, res) => {
 
 app.use('/api/v1/detalles',detalleRouter)
 app.use('/api/v1/matriculas',matriculaRouter)
+
+
 module.exports = app

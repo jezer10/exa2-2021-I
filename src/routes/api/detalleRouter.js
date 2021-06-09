@@ -2,6 +2,8 @@ const router = require('express').Router();
 
 const detalleController= require('../../controller/detalleController')
 
+
+
 router.get('/:id',detalleController.getDetalle)
 router.get('/',detalleController.getDetalles)
 router.post('/',detalleController.createDetalle)
