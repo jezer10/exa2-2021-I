@@ -29,26 +29,28 @@ matriculaController.getMatriculas = async (req, res) => {
 
 matriculaController.createMatricula = async (req, res) => {
     try {
-        const { fecha, iduser } = req.body
-        const response = await pg.query('insert into matricula (fecha,iduser) values ($1,$2)', [fecha, iduser])
-        return res.status(201).send(response.rowCount);
+        const { iduser ,idescuela,idalumno} = req.body
+        const fecha = new Date()
+        const response = await pg.query('insert into matricula (fecha,iduser,idescuela,idalumno) values ($1,$2,$3,$4)', [fecha, iduser,idescuela,idalumno])
+        return res.status(201).json(response.rowCount);
     } catch (error) {
         console.log(error)
-        return res.status(200).send('Internal server error')
+        return res.status(200).json('Internal server error')
 
     }
 }
 
 matriculaController.updateMatricula = async (req, res) => {
     try {
-        const { idmatricula, fecha, iduser } = req.body
+        const idmatricula = req.params.id
+        const { fecha,iduser, idescuela,idalumno } = req.body
 
-        const response = await pg.query('update matricula set fecha=$2,iduser=$3 where idmatricula=$1', [idmatricula, fecha, iduser])
+        const response = await pg.query('update matricula set fecha=$2, iduser=$3,idescuela=$4,idalumno=$5 where idmatricula=$1', [idmatricula, fecha, iduser])
 
-        return res.status(200).send(response.rowCount)
+        return res.status(200).json(response.rowCount)
     } catch (error) {
         console.log(error);
-        return res.status(200).send('Internal server error')
+        return res.status(200).json('Internal server error')
 
     }
 

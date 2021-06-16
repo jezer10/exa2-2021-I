@@ -1,12 +1,14 @@
-
+const passport = require('passport')
 const router = require('express').Router()
 
-const matriculaController= require('../../controller/matriculaController')
+const matriculaController = require('../../controller/matriculaController')
 
-router.get('/:id',matriculaController.getMatricula)
-router.get('/',matriculaController.getMatriculas)
-router.post('/',matriculaController.createMatricula)
-router.put('/:id',matriculaController.updateMatricula)
-router.delete('/:id',matriculaController.deleteMatricula)
+require('../../utils/auth/jwt')
 
-module.exports=router
+router.get('/:id', passport.authenticate("jwt", { session: false }), matriculaController.getMatricula)
+router.get('/', passport.authenticate("jwt", { session: false }), matriculaController.getMatriculas)
+router.post('/', passport.authenticate("jwt", { session: false }), matriculaController.createMatricula)
+router.put('/:id', passport.authenticate("jwt", { session: false }), matriculaController.updateMatricula)
+router.delete('/:id', passport.authenticate("jwt", { session: false }), matriculaController.deleteMatricula)
+
+module.exports = router
