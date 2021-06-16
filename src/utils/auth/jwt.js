@@ -1,11 +1,7 @@
 const passport = require("passport");
-
 const { Strategy, ExtractJwt } = require("passport-jwt")
-
 const boom = require('@hapi/boom')
-
 const UsersService = require('../../services/userService')
-
 const userService = new UsersService
 
 passport.use(
@@ -25,6 +21,5 @@ passport.use(
         } catch (error) {
             return next(error)
         }
-
     })
 )
