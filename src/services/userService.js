@@ -1,10 +1,7 @@
 const p = require('../database')
 const { comparePassword, encryptPassword } = require('../utils/encrypt')
 class UserService {
-    constructor() {
-
-    }
-
+    constructor() { }
     async createUser(user) {
         try {
             const { idpersona, username, password, idrole } = user
@@ -15,8 +12,6 @@ class UserService {
         } catch (error) {
             throw new Error(error)
         }
-
-
     }
     async hasUser({ username, password }) {
         const response = await p.query('select * from users where username=$1', [username])
@@ -24,9 +19,7 @@ class UserService {
         if (!user) {
             return false
         }
-
         const equalPassword = await comparePassword(password, user.password);
-
         return equalPassword;
     }
     async getUserByUsername(username) {
@@ -35,7 +28,6 @@ class UserService {
             if (res.rows.length === 1) {
                 return res.rows[0]
             }
-
         } catch (error) {
             console.log(error)
         }

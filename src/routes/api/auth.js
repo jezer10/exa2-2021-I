@@ -15,7 +15,6 @@ router.post('/token', async (req, res, next) => {
                 if (error) {
                     next(error)
                 }
-
                 const payload = { sub: user.username }
                 const token = jwt.sign(payload, process.env.JWT_TOKEN_SECRET, {
                     expiresIn: "15m"
